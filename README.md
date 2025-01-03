@@ -54,16 +54,3 @@ A web application designed to help users learn effectively using the **spaced re
 ### Add Topics
 ![Add Topics Screenshot](https://via.placeholder.com/800x400)
 
----
-
-## **Setup Instructions**
-
-### Prerequisites
-- Node.js and npm
-- Python 3.x
-- MongoDB
-
-### Frontend
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
