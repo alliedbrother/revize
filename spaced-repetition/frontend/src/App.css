@@ -1,0 +1,512 @@
+#root {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Full width container styles */
+.container {
+  max-width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.card {
+  width: 100%;
+}
+
+.home-page .container {
+  max-width: 1320px !important; /* Keep home page centered */
+}
+
+/* Make navbar stretch full width */
+.navbar {
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem 2rem !important;
+}
+
+.navbar .container-fluid {
+  width: 100%;
+  padding: 0;
+}
+
+/* Make cards in the dashboard fill their containers */
+.dashboard-stats .card {
+  width: 100%;
+}
+
+/* Auth forms */
+.auth-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+.auth-container .card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Ensure the main content area takes up full width */
+main {
+  width: 100%;
+  padding: 0;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1200px) {
+  .container:not(.home-page .container) {
+    max-width: 100% !important;
+  }
+}
+
+/* App container to ensure full-width layout */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.app-container main {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Date input styling */
+.date-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.date-input {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Date status styling */
+.date-status-badge {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 12px;
+}
+
+.date-status-past {
+  border-color: #ffc107;
+  background-color: rgba(255, 193, 7, 0.05);
+}
+
+.date-status-today {
+  border-color: #28a745;
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.date-status-future {
+  border-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Fix calendar icon visibility in date inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: block !important;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23007bff" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+input[type="date"] {
+  padding-right: 30px;
+  position: relative;
+  color: inherit;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  position: relative;
+}
+
+/* Make date inputs more consistent across browsers */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Firefox-specific styles for date inputs */
+@-moz-document url-prefix() {
+  input[type="date"] {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23007bff" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    background-size: 20px;
+    padding-right: 30px;
+  }
+}
+
+/* Equal height rows */
+.equal-height-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.equal-height-row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Border between columns on md screens and up */
+@media (min-width: 768px) {
+  .border-end-md {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-right: 1.5rem;
+  }
+  
+  /* Add some space between the columns */
+  .equal-height-row .col-md-6:last-child {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Sky blue background for today's learning */
+.bg-sky-blue {
+  background-color: #e0f7fa !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 188, 212, 0.1);
+}
+
+/* Pale pink background for today's revisions */
+.bg-pale-pink {
+  background-color: #ffebee;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Pale blue background for today's learning */
+.bg-pale-blue {
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Topic cards styling */
+.topic-card {
+  background-color: #fff;
+  border-left: 4px solid #2196f3;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.topic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.topic-card .topic-title {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.topic-card .delete-btn {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.topic-card:hover .delete-btn {
+  opacity: 1;
+}
+
+/* Revision cards styling */
+.revision-card {
+  background-color: #fff;
+  border-left: 4px solid #f44336;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.revision-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.revision-card .topic-title {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Custom scrollbar for containers */
+.topics-container, .revisions-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.topics-container::-webkit-scrollbar, .revisions-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.topics-container::-webkit-scrollbar-track, .revisions-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.topics-container::-webkit-scrollbar-thumb, .revisions-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* Fix padding for cards in scroll containers */
+.card {
+  padding: 0;
+}
+
+/* Dashboard title styling */
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #424242;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Ensure dropdown menus appear above cards */
+.dropdown-menu {
+  z-index: 9999 !important;
+  position: absolute !important;
+}
+
+/* Ensure dropdown toggles have higher z-index */
+.dropdown-toggle {
+  position: relative;
+  z-index: 999;
+}
+
+/* Fix z-index for cards to ensure proper stacking */
+.revision-card, .topic-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Welcome message styling */
+.welcome-container {
+  margin-bottom: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+.welcome-text {
+  font-size: 1.6rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.username-highlight {
+  font-size: 2.2rem;
+  font-weight: 600;
+  font-family: 'Satisfy', 'Brush Script MT', cursive;
+  color: #2c3e50;
+  background: linear-gradient(120deg, #e0f7fa, #bbdefb, #c5cae9, #d1c4e9, #bbdefb, #e0f7fa);
+  background-size: 400% 400%;
+  padding: 0.25rem 0.75rem 0.25rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  animation: twinkle 8s ease-in-out infinite;
+  position: relative;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  transform: rotate(-1deg);
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.username-highlight:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 5px 15px rgba(100, 181, 246, 0.4);
+}
+
+@keyframes twinkle {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+  25% {
+    box-shadow: 0 4px 12px rgba(100, 181, 246, 0.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 5px 15px rgba(100, 181, 246, 0.3);
+  }
+  75% {
+    box-shadow: 0 4px 12px rgba(100, 181, 246, 0.2);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Next revision card styling */
+.next-revision-card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.next-revision-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.2);
+}
+
+.next-revision-card .card-header {
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+}
+
+.next-revision-card .btn-success {
+  transition: all 0.2s;
+}
+
+.next-revision-card .btn-success:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.next-revision-card .dropdown-toggle {
+  transition: all 0.2s;
+}
+
+.next-revision-card .dropdown-toggle:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+/* Revision tabs styling */
+.revision-tabs .nav-link {
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s ease;
+}
+
+.revision-tabs .nav-link.active {
+  background-color: #f8f9fa;
+  border-bottom: none;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Future revisions styling */
+.future-revisions .date-group {
+  border-left: 4px solid #e9ecef;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.future-revisions .date-group:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 2.5rem;
+  bottom: -1rem;
+  width: 1px;
+  background-color: #e9ecef;
+  z-index: 0;
+}
+
+.date-header {
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+  display: flex;
+  align-items: center;
+}
+
+.today-header {
+  color: #28a745;
+  font-weight: 700;
+}
+
+/* Make date groups for different dates visually distinct */
+.future-revisions .date-group:nth-child(odd) {
+  border-left-color: #007bff;
+}
+
+.future-revisions .date-group:nth-child(even) {
+  border-left-color: #6610f2;
+}
+
+.future-revisions .date-group:nth-child(3n) {
+  border-left-color: #fd7e14;
+}
+
+/* Set to tomorrow button */
+.set-tomorrow-btn {
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.set-tomorrow-btn:hover {
+  background-color: #e9ecef;
+  transform: translateY(-1px);
+}
