@@ -1,47 +1,77 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { register } = useAuth();
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const validateForm = () => {
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all fields');
+      return false;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return false;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validation
-    if (!username || !email || !password || !confirmPassword) {
-      return setError('Please fill in all fields');
-    }
-    
-    if (password !== confirmPassword) {
-      return setError('Passwords do not match');
-    }
-    
-    if (password.length < 6) {
-      return setError('Password must be at least 6 characters long');
+    if (!validateForm()) {
+      return;
     }
     
     try {
       setError('');
       setLoading(true);
-      await register(username, email, password);
-      navigate('/dashboard');
+      
+      // TODO: Implement actual registration logic here
+      console.log('Registration attempt with:', { 
+        username: formData.username,
+        email: formData.email 
+      });
+      
+      // For now, simulate a successful registration
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+      
     } catch (err) {
-      if (err.response && err.response.data) {
-        setError(err.response.data.error || 'Failed to register account');
-      } else {
-        setError('Failed to register account');
-      }
-      console.error(err);
+      console.error('Registration error:', err);
+      setError('Failed to create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -52,7 +82,7 @@ const Register = () => {
       <Row className="justify-content-center">
         <Col md={6}>
           <Card>
-            <Card.Header as="h2" className="text-center">Register</Card.Header>
+            <Card.Header as="h2" className="text-center">Create Account</Card.Header>
             <Card.Body>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
@@ -60,9 +90,11 @@ const Register = () => {
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
                     required
+                    placeholder="Choose a username"
                   />
                 </Form.Group>
 
@@ -70,9 +102,11 @@ const Register = () => {
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
+                    placeholder="Enter your email"
                   />
                 </Form.Group>
 
@@ -80,19 +114,26 @@ const Register = () => {
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     required
+                    placeholder="Create a password"
                   />
+                  <Form.Text className="text-muted">
+                    Password must be at least 6 characters long
+                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="confirmPassword">
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
                     type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                     required
+                    placeholder="Confirm your password"
                   />
                 </Form.Group>
 
@@ -102,7 +143,7 @@ const Register = () => {
                   className="w-100"
                   disabled={loading}
                 >
-                  {loading ? 'Registering...' : 'Register'}
+                  {loading ? 'Creating Account...' : 'Create Account'}
                 </Button>
               </Form>
             </Card.Body>

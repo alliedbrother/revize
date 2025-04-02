@@ -510,3 +510,80 @@ input[type="date"]::-webkit-clear-button {
   background-color: #e9ecef;
   transform: translateY(-1px);
 }
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  padding: 0.5rem 1.5rem;
+}
+
+.hero-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0d6efd 0%, #0099ff 100%);
+  color: white;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.hero-section img {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  transition: transform 0.3s ease;
+}
+
+.hero-section img:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #e3f2fd;
+  margin-bottom: 1.5rem;
+}
+
+.feature-icon img {
+  width: 64px;
+  height: 64px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .feature-icon img {
+  transform: scale(1.1);
+}
+
+.auth-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}

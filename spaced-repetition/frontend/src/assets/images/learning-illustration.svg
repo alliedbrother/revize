@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Elements -->
+  <circle cx="400" cy="300" r="280" fill="#E3F2FD" opacity="0.5"/>
+  <circle cx="400" cy="300" r="200" fill="#BBDEFB" opacity="0.3"/>
+  
+  <!-- Brain Icon -->
+  <g transform="translate(320,200)">
+    <path d="M80 0C35.8 0 0 35.8 0 80s35.8 80 80 80 80-35.8 80-80S124.2 0 80 0zm0 150c-38.6 0-70-31.4-70-70s31.4-70 70-70 70 31.4 70 70-31.4 70-70 70z" 
+          fill="#2196F3"/>
+    <path d="M80 20C46.9 20 20 46.9 20 80s26.9 60 60 60 60-26.9 60-60S113.1 20 80 20zm0 110c-27.6 0-50-22.4-50-50s22.4-50 50-50 50 22.4 50 50-22.4 50-50 50z" 
+          fill="#1976D2"/>
+    <!-- Brain Patterns -->
+    <path d="M80 40c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40zm0 70c-16.6 0-30-13.4-30-30s13.4-30 30-30 30 13.4 30 30-13.4 30-30 30z" 
+          fill="#BBDEFB"/>
+  </g>
+  
+  <!-- Learning Cards -->
+  <g transform="translate(200,350)">
+    <!-- Card Stack -->
+    <rect x="0" y="20" width="120" height="160" rx="10" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+    <rect x="10" y="10" width="120" height="160" rx="10" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+    <rect x="20" y="0" width="120" height="160" rx="10" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+  </g>
+  
+  <!-- Progress Arrows -->
+  <g transform="translate(400,350)">
+    <path d="M0,0 C30,0 60,-30 90,-30 L100,-30 L90,-40 L100,-30 L90,-20" 
+          stroke="#2196F3" stroke-width="3" fill="none"/>
+    <path d="M0,30 C30,30 60,0 90,0 L100,0 L90,-10 L100,0 L90,10" 
+          stroke="#2196F3" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Success Stars -->
+  <g transform="translate(500,200)">
+    <path d="M10,10 L15,0 L20,10 L30,15 L20,20 L15,30 L10,20 L0,15 Z" fill="#FFC107"/>
+  </g>
+  <g transform="translate(550,250)">
+    <path d="M8,8 L12,0 L16,8 L24,12 L16,16 L12,24 L8,16 L0,12 Z" fill="#FFC107"/>
+  </g>
+  <g transform="translate(480,280)">
+    <path d="M6,6 L9,0 L12,6 L18,9 L12,12 L9,18 L6,12 L0,9 Z" fill="#FFC107"/>
+  </g>
+</svg> 

@@ -1,102 +1,89 @@
-import { useState, useEffect } from 'react';
-import { Container, Card, Alert, Spinner, Button } from 'react-bootstrap';
-import { topicService } from '../../services/api';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Card, Form, Button, ListGroup, Alert } from 'react-bootstrap';
 
 const TodaysLearning = () => {
-  const [todaysLearning, setTodaysLearning] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [topics, setTopics] = useState([]);
+  const [newTopic, setNewTopic] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchTodaysTopics();
-  }, []);
-
-  const fetchTodaysTopics = async () => {
-    try {
-      setLoading(true);
-      const topicsResponse = await topicService.getAllTopics();
-      
-      const todayTopics = [];
-      const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-      
-      topicsResponse.data.forEach(topic => {
-        // Check if topic was created today
-        if (new Date(topic.date_created).toISOString().split('T')[0] === today) {
-          todayTopics.push(topic);
-        }
-      });
-      
-      setTodaysLearning(todayTopics);
-    } catch (err) {
-      setError('Failed to fetch today\'s topics. Please try again later.');
-      console.error(err);
-    } finally {
-      setLoading(false);
+  const handleAddTopic = (e) => {
+    e.preventDefault();
+    
+    if (!newTopic.trim()) {
+      setError('Please enter a topic');
+      return;
     }
+
+    const topic = {
+      id: Date.now(),
+      title: newTopic.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    setTopics([...topics, topic]);
+    setNewTopic('');
+    setError('');
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await topicService.deleteTopic(id);
-      setTodaysLearning(todaysLearning.filter(topic => topic.id !== id));
-    } catch (err) {
-      setError('Failed to delete topic. Please try again.');
-      console.error(err);
-    }
+  const handleDeleteTopic = (id) => {
+    setTopics(topics.filter(topic => topic.id !== id));
   };
-
-  if (loading) {
-    return (
-      <Container className="text-center mt-3">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading today's topics...</span>
-        </Spinner>
-      </Container>
-    );
-  }
 
   return (
-    <Container className="h-100">
-      {error && <Alert variant="danger">{error}</Alert>}
-      
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Topics I Learned Today</h2>
-        <Link to="/topics/new" className="btn btn-primary">
-          Add New Topic
-        </Link>
-      </div>
-      
-      <div className="topics-container bg-sky-blue p-3 rounded" style={{maxHeight: '500px', overflowY: 'auto'}}>
-        {todaysLearning.length === 0 ? (
-          <div className="text-center py-4">
-            <h5>You haven't added any topics today.</h5>
-            <p>Learning something new? Add it as a topic!</p>
-          </div>
+    <Card className="h-100">
+      <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 className="mb-0">Today's Learning</h5>
+        <span className="badge bg-light text-primary">
+          {topics.length} {topics.length === 1 ? 'Topic' : 'Topics'}
+        </span>
+      </Card.Header>
+      <Card.Body>
+        <Form onSubmit={handleAddTopic} className="mb-3">
+          <Form.Group className="d-flex gap-2">
+            <Form.Control
+              type="text"
+              value={newTopic}
+              onChange={(e) => setNewTopic(e.target.value)}
+              placeholder="What did you learn today?"
+              isInvalid={!!error}
+            />
+            <Button type="submit" variant="primary">
+              Add
+            </Button>
+          </Form.Group>
+          {error && <Form.Text className="text-danger">{error}</Form.Text>}
+        </Form>
+
+        {topics.length === 0 ? (
+          <Alert variant="info">
+            You haven't added any topics for today. Start by adding what you've learned!
+          </Alert>
         ) : (
-          <>
-            <p>You've learned {todaysLearning.length} new topic(s) today:</p>
-            {todaysLearning.map(topic => (
-              <Card key={topic.id} className="mb-2 topic-card">
-                <Card.Body className="d-flex justify-content-between align-items-center py-2">
-                  <Link to={`/topics/${topic.id}`} className="topic-title">
-                    <h5 className="mb-0">{topic.title}</h5>
-                  </Link>
-                  <Button 
-                    variant="outline-danger" 
-                    size="sm" 
-                    onClick={() => handleDelete(topic.id)}
-                    className="delete-btn"
-                  >
-                    ✕
-                  </Button>
-                </Card.Body>
-              </Card>
+          <ListGroup variant="flush">
+            {topics.map(topic => (
+              <ListGroup.Item
+                key={topic.id}
+                className="d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <h6 className="mb-0">{topic.title}</h6>
+                  <small className="text-muted">
+                    {new Date(topic.timestamp).toLocaleTimeString()}
+                  </small>
+                </div>
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => handleDeleteTopic(topic.id)}
+                >
+                  Remove
+                </Button>
+              </ListGroup.Item>
             ))}
-          </>
+          </ListGroup>
         )}
-      </div>
-    </Container>
+      </Card.Body>
+    </Card>
   );
 };
 

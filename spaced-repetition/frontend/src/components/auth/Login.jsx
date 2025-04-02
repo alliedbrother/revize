@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap';
 
 const Login = () => {
@@ -8,28 +7,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
   
-  const { login, currentUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // If user is already logged in, redirect to dashboard
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/dashboard', { replace: true });
-    }
-  }, [currentUser, navigate]);
-
-  // Handle successful login with a delay to ensure state updates properly
-  useEffect(() => {
-    if (loginSuccess) {
-      const timer = setTimeout(() => {
-        navigate('/dashboard', { replace: true });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [loginSuccess, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,13 +20,15 @@ const Login = () => {
     try {
       setError('');
       setLoading(true);
-      console.log('Attempting login with:', { username });
-      const user = await login(username, password);
-      console.log('Login successful, user data:', user);
-      console.log('Redirecting to dashboard...');
-      setLoginSuccess(true);
-      // Force hard redirect if React Router navigation fails
-      window.location.href = '/dashboard';
+      
+      // TODO: Implement actual login logic here
+      console.log('Login attempt with:', { username });
+      
+      // For now, simulate a successful login
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+      
     } catch (err) {
       console.error('Login error:', err);
       setError('Failed to login. Please check your credentials.');
