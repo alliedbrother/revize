@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    password_confirm: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +25,7 @@ const Register = () => {
   };
 
   const validateForm = () => {
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+    if (!formData.username || !formData.email || !formData.password || !formData.password_confirm) {
       setError('Please fill in all fields');
       return false;
     }
@@ -33,7 +35,7 @@ const Register = () => {
       return false;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.password_confirm) {
       setError('Passwords do not match');
       return false;
     }
@@ -58,20 +60,36 @@ const Register = () => {
       setError('');
       setLoading(true);
       
-      // TODO: Implement actual registration logic here
-      console.log('Registration attempt with:', { 
+      console.log('Attempting registration with:', {
         username: formData.username,
-        email: formData.email 
+        email: formData.email,
+        password: formData.password,
+        password_confirm: formData.password_confirm
       });
       
-      // For now, simulate a successful registration
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1000);
+      const { success, error: registerError } = await register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        password_confirm: formData.password_confirm
+      });
       
+      console.log('Registration response:', { success, registerError });
+      
+      if (success) {
+        navigate('/dashboard');
+      } else {
+        const errorMessage = registerError || 'Failed to create account. Please try again.';
+        console.error('Registration failed:', errorMessage);
+        setError(errorMessage);
+      }
     } catch (err) {
-      console.error('Registration error:', err);
-      setError('Failed to create account. Please try again.');
+      console.error('Registration error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      setError(err.response?.data?.message || 'Failed to create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -125,12 +143,12 @@ const Register = () => {
                   </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="confirmPassword">
+                <Form.Group className="mb-3" controlId="password_confirm">
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
                     type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
+                    name="password_confirm"
+                    value={formData.password_confirm}
                     onChange={handleChange}
                     required
                     placeholder="Confirm your password"

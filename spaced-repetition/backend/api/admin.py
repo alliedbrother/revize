@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .models import Topic, Revision
+from .models import Topic, Revision, RevisionSchedule
 
 class TokenInline(admin.TabularInline):
     model = Token
@@ -33,10 +33,17 @@ admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'date_created')
-    list_filter = ('date_created',)
-    search_fields = ('title', 'description')
-    readonly_fields = ('date_created',)
+    list_display = ('title', 'user', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('title', 'content')
+    readonly_fields = ('created_at',)
+
+@admin.register(RevisionSchedule)
+class RevisionScheduleAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'scheduled_date', 'completed', 'postponed')
+    list_filter = ('scheduled_date', 'completed', 'postponed')
+    search_fields = ('topic__title',)
+    readonly_fields = ('created_at',)
 
 @admin.register(Revision)
 class RevisionAdmin(admin.ModelAdmin):

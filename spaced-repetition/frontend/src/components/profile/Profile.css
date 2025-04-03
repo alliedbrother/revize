@@ -1,0 +1,157 @@
+/* Profile Card Styling */
+.profile-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-header {
+  background: linear-gradient(120deg, #2C3E50, #4A5568);
+  color: white;
+  padding: 1.5rem;
+  border: none;
+}
+
+.profile-icon {
+  font-size: 2.25rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Section Styling */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2C3E50;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.account-info-section, .password-section {
+  padding: 0.5rem 0.25rem;
+}
+
+.info-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6c757d;
+  width: 140px;
+  display: flex;
+  align-items: center;
+}
+
+.info-value {
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.info-value:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Divider Styling */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(44, 62, 80, 0.05), rgba(44, 62, 80, 0.2), rgba(44, 62, 80, 0.05));
+  margin: 1.5rem 0;
+  border: none;
+}
+
+/* Form Control Styling */
+.form-control-lg {
+  font-size: 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-control-lg:focus {
+  border-color: #4a9cdb;
+  box-shadow: 0 0 0 3px rgba(74, 156, 219, 0.2);
+}
+
+.form-text {
+  font-size: 1rem !important;
+}
+
+/* Button Styling */
+.update-btn, .logout-btn {
+  font-size: 1.25rem;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.update-btn {
+  background: linear-gradient(120deg, #4a9cdb, #3a7cbd);
+  border: none;
+  box-shadow: 0 4px 6px rgba(58, 124, 189, 0.2);
+}
+
+.update-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(58, 124, 189, 0.3);
+}
+
+.update-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(58, 124, 189, 0.2);
+}
+
+.logout-btn {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.logout-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Alert Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+  font-size: 1.25rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Label Styling */
+.form-label {
+  font-size: 1.25rem;
+} 

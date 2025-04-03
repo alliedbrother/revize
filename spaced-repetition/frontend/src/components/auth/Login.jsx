@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,29 +10,39 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Login form submitted');
     
     if (!username || !password) {
+      console.log('Validation failed: Missing credentials');
       return setError('Please enter both username and password');
     }
     
     try {
       setError('');
       setLoading(true);
+      console.log('Attempting login with credentials:', { username });
       
-      // TODO: Implement actual login logic here
-      console.log('Login attempt with:', { username });
+      const { success, error: loginError } = await login({ username, password });
+      console.log('Login attempt result:', { success, loginError });
       
-      // For now, simulate a successful login
-      setTimeout(() => {
+      if (success) {
+        console.log('Login successful, navigating to dashboard...');
         navigate('/dashboard');
-      }, 1000);
-      
+      } else {
+        console.log('Login failed:', loginError);
+        setError(loginError || 'Failed to login. Please check your credentials.');
+      }
     } catch (err) {
-      console.error('Login error:', err);
-      setError('Failed to login. Please check your credentials.');
+      console.error('Login error:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      setError('Failed to login. Please try again.');
     } finally {
       setLoading(false);
     }
