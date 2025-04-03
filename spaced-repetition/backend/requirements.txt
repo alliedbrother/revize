@@ -1,9 +1,28 @@
-asgiref==3.8.1
-dataclasses==0.6
+# Django and Core dependencies
 Django==5.1.7
-django-cors-headers==4.7.0
 djangorestframework==3.16.0
-djongo==1.2.31
-dnspython==2.7.0
-pymongo==4.11.3
+django-cors-headers==4.7.0
+asgiref==3.8.1
 sqlparse==0.5.3
+pytz==2025.2
+
+# Database dependencies
+djongo==1.2.31
+pymongo==4.11.3
+dnspython==2.7.0
+dataclasses==0.6
+
+# Production dependencies
+gunicorn==21.2.0  # WSGI HTTP Server
+whitenoise==6.6.0  # Static file serving
+dj-database-url==2.1.0  # Database URL configuration
+
+# AWS specific
+boto3==1.33.0  # For AWS S3 integration
+django-storages==1.14.2  # Storage backends
+
+# Security
+django-environ==0.11.2  # Environment variable handling
+
+# Optional for improved performance
+uvicorn==0.27.1  # ASGI server (alternative to gunicorn)

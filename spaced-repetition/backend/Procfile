@@ -1,0 +1,1 @@
+web: gunicorn spaced_repetition.wsgi --log-file - 
