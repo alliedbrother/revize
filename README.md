@@ -1,6 +1,6 @@
 # Spaced Repetition App
 
-# Hip HIp Hurray the app is now live visit - revize.live
+# Hip Hip Hurray the app is now live visit - revize.live
 
 A web application designed to help users learn effectively using the **spaced repetition** method. The app allows users to:
 - Add study topics with customizable revision schedules.
